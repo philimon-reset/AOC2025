@@ -23,7 +23,8 @@ int AOC::findSafeCode(vector<string> instructions)
     for (const string str : instructions)
     {
         const char direction = str.at(0);
-        const int rotation = stoi(str.substr(1));
+        const string full_direction = direction == 'L' ? "Left" : "Right";
+        const int rotation = stoi(str.substr(1)) % 100;
         switch (direction)
         {
         case 'R':
@@ -36,7 +37,7 @@ int AOC::findSafeCode(vector<string> instructions)
             break;
         case 'L':
             if (dial - rotation < 0)
-                dial = 100 - (rotation - dial);
+                dial = 100 - (max(rotation, dial) - min(rotation, dial));
             else
                 dial -= rotation;
             break;
@@ -45,6 +46,7 @@ int AOC::findSafeCode(vector<string> instructions)
         }
         if (dial == 0)
             password += 1;
+        cout << "Rotate: " <<  full_direction << ", " << rotation << " | Dial: " << dial << endl;
     }
     return password;
 }

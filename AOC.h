@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stoi;
+using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stoi, std::min, std::max;
 
 
 class AOC
