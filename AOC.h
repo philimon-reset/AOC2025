@@ -11,10 +11,12 @@ class AOC
 public:
     static vector<string> extractFromFile(string filename);
     static int findSafeCode(vector<string> instructions);
+    static int findSafeCodeOverLap(vector<string> instructions);
 };
 
 
 
+// Helper templates for nicer printing
 template <typename>
 struct is_std_vector : std::false_type {};
 

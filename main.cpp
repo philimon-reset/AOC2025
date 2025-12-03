@@ -2,5 +2,5 @@
 
 int main() {
     const vector<string> instructions = AOC::extractFromFile("1a");
-    cout << AOC::findSafeCode(instructions);
+    cout << AOC::findSafeCodeOverLap(instructions);
 }

@@ -28,16 +28,14 @@ int AOC::findSafeCode(vector<string> instructions)
         switch (direction)
         {
         case 'R':
-            if (dial + rotation == 100)
-                dial = 0;
-            else if (dial + rotation > 99)
+            if (dial + rotation > 99)
                 dial = (rotation + dial) - 100;
             else
                 dial += rotation;
             break;
         case 'L':
             if (dial - rotation < 0)
-                dial = 100 - (max(rotation, dial) - min(rotation, dial));
+                dial = 100 - (rotation - dial);
             else
                 dial -= rotation;
             break;
@@ -46,6 +44,44 @@ int AOC::findSafeCode(vector<string> instructions)
         }
         if (dial == 0)
             password += 1;
+        cout << "Rotate: " <<  full_direction << ", " << rotation << " | Dial: " << dial << endl;
+    }
+    return password;
+}
+
+int AOC::findSafeCodeOverLap(vector<string> instructions)
+{
+    int dial = 50;
+    int password = 0;
+    for (const string str : instructions)
+    {
+        int prev_dial = dial;
+        const char direction = str.at(0);
+        const string full_direction = direction == 'L' ? "Left" : "Right";
+        int rotation = stoi(str.substr(1));
+        password += rotation / 100;
+        rotation %= 100;
+        switch (direction)
+        {
+        case 'R':
+            if (dial + rotation > 99)
+                dial = (rotation + dial) - 100;
+            else
+                dial += rotation;
+            if ((dial < prev_dial && prev_dial != 0) || dial == 0)
+                password += 1;
+            break;
+        case 'L':
+            if (dial - rotation < 0)
+                dial = 100 - (rotation - dial);
+            else
+                dial -= rotation;
+            if ((dial > prev_dial && prev_dial != 0) || dial == 0)
+                password += 1;
+            break;
+        default:
+            break;
+        }
         cout << "Rotate: " <<  full_direction << ", " << rotation << " | Dial: " << dial << endl;
     }
     return password;
