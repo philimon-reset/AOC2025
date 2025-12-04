@@ -3,15 +3,21 @@
 #include <iostream>
 #include <fstream>
 
-using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stoi, std::min, std::max;
+using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stol, std::min, std::max, std::pair, std::reverse;
 
 
 class AOC
 {
 public:
+    // Helper methods
     static vector<string> extractFromFile(string filename);
+    static vector<pair<long, long>> extractRangePairFromFile(const string& fileName);
+    static vector<long> getNumberOfDigits(long num);
+    // First Day
     static int findSafeCode(vector<string> instructions);
     static int findSafeCodeOverLap(vector<string> instructions);
+    // Second Day
+    static long sumOfInvalidIds(vector<pair<long, long>> id_pairs);
 };
 
 

@@ -1,6 +1,6 @@
 #include "AOC.h"
 
 int main() {
-    const vector<string> instructions = AOC::extractFromFile("1a");
-    cout << AOC::findSafeCodeOverLap(instructions);
+    const vector<pair<long, long>> id_pairs = AOC::extractRangePairFromFile("2a");
+    cout << AOC::sumOfInvalidIds(id_pairs);
 }
