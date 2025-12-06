@@ -2,8 +2,9 @@
 #define SETUP_AOC_H
 #include <iostream>
 #include <fstream>
+#include <unordered_set>
 
-using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stol, std::min, std::max, std::pair, std::reverse;
+using std::cout, std::endl, std::ifstream, std::string, std::vector, std::ostream, std::unordered_map, std::stol, std::min, std::max, std::pair, std::reverse, std::to_string, std::unordered_set;
 
 
 class AOC
@@ -11,13 +12,14 @@ class AOC
 public:
     // Helper methods
     static vector<string> extractFromFile(string filename);
-    static vector<pair<long, long>> extractRangePairFromFile(const string& fileName);
+    static vector<pair<string, string>> extractRangePairFromFile(const string& fileName);
     static vector<long> getNumberOfDigits(long num);
     // First Day
     static int findSafeCode(vector<string> instructions);
     static int findSafeCodeOverLap(vector<string> instructions);
     // Second Day
-    static long sumOfInvalidIds(vector<pair<long, long>> id_pairs);
+    static long sumOfInvalidIds(vector<pair<string, string>> id_pairs);
+    static bool checkDuplicateSequence(const string& val);
 };
 
 

@@ -16,19 +16,17 @@ vector<string> AOC::extractFromFile(string fileName)
     return container;
 }
 
-vector<pair<long, long>> AOC::extractRangePairFromFile(const string& fileName)
+vector<pair<string, string>> AOC::extractRangePairFromFile(const string& fileName)
 {
     ifstream mFile(fileName);
-    vector<pair<long, long>> container;
+    vector<pair<string, string>> container;
     if (mFile.is_open())
     {
         string line;
         while (getline(mFile, line, ','))
         {
             size_t end = line.find('-');
-            long first = stol(line.substr(0, end));
-            long second = stol(line.substr(end + 1));
-            container.emplace_back(first, second);
+            container.emplace_back(line.substr(0, end), line.substr(end + 1));
         }
         mFile.close();
     }
@@ -107,26 +105,29 @@ int AOC::findSafeCodeOverLap(vector<string> instructions)
     return password;
 }
 
-long AOC::sumOfInvalidIds(vector<pair<long, long>> id_pairs)
+long AOC::sumOfInvalidIds(vector<pair<string, string>> id_pairs)
 {
     long invalid_sum = 0;
+    unordered_set<long> check;
     for (auto [start, end] : id_pairs)
     {
-        while (start <= end)
+        long first = stol(start);
+        long last = stol(end);
+        while (first <= last)
         {
-            vector<long> digits = AOC::getNumberOfDigits(start);
-            long num_size = digits.size();
-            if (num_size % 2 == 0)
-            {
-                vector<long> front = {digits.begin(), digits.begin() + (num_size / 2)};
-                vector<long> back = {digits.begin() + (num_size / 2), digits.end()};
-                if (front == back)
-                    invalid_sum += start;
-            }
-            start++;
+            string cur = std::to_string(first);
+            if (checkDuplicateSequence(cur))
+                invalid_sum += first;
+            first++;
         }
     }
     return invalid_sum;
+}
+
+bool AOC::checkDuplicateSequence(const string& val)
+{
+    string cur = (val + val).substr(1, (val.size() * 2) - 2);
+    return cur.find(val) != string::npos;
 }
 
 vector<long> AOC::getNumberOfDigits(long num)
