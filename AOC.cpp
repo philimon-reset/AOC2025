@@ -141,3 +141,59 @@ vector<long> AOC::getNumberOfDigits(long num)
     reverse(res.begin(), res.end());
     return res;
 }
+
+int AOC::getMaxJoltage(vector<string> banks)
+{
+    int joltage = 0;
+    for (const string& str: banks)
+    {
+        int l = 0;
+        int rmax = 0;
+        int lval = 0;
+        int rval = 0;
+        for (int r = 1; r < str.size(); r++)
+        {
+            lval = str.at(l) - '0';
+            rval = str.at(r) - '0';
+            rmax = max(rmax, rval);
+            // if (lval >= rval && rval == 9)
+            //     break;
+            if (rval > lval && r < str.size() - 1)
+            {
+                rmax = str.at(r + 1) - '0';
+                l = r;
+            }
+        }
+        string curval({char('0' + lval), char('0' + rmax)});
+        joltage += stoi(curval);
+    }
+    return joltage;
+}
+
+int AOC::getMaxJoltageImproved(vector<string> banks)
+{
+    int joltage = 0;
+    for (const string& str: banks)
+    {
+        int l = 0;
+        int rmax = 0;
+        int lval = 0;
+        int rval = 0;
+        for (int r = 1; r < str.size(); r++)
+        {
+            lval = str.at(l) - '0';
+            rval = str.at(r) - '0';
+            rmax = max(rmax, rval);
+            // if (lval >= rval && rval == 9)
+            //     break;
+            if (rval > lval && r < str.size() - 1)
+            {
+                rmax = str.at(r + 1) - '0';
+                l = r;
+            }
+        }
+        string curval({char('0' + lval), char('0' + rmax)});
+        joltage += stoi(curval);
+    }
+    return joltage;
+}
